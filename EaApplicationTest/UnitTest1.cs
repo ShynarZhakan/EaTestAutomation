@@ -37,8 +37,10 @@ namespace EaApplicationTest
 
         }
 
-        [Fact]
-        public void Test2()
+        [Theory]
+        [InlineData("FirstProduct", "New prod description", 21354, "CPU")]
+        [InlineData("FirstProduct2", "New prod description", 3000, "MONITOR")]
+        public void Test2(string name, string description, int price, string productType)
         {
             // HomePage
             var homePage = new HomePage(_driverFixture);
@@ -49,9 +51,9 @@ namespace EaApplicationTest
 
             // Create Product
             productPage.ClickCreateButton();
-            productPage.CreateProduct("POM product", "POM Description", 4000, "CPU");
+            productPage.CreateProduct(name, description, price, productType);
 
-            productPage.PerformCLickOnSpecialValue("Monitor", "Details");
+            productPage.PerformCLickOnSpecialValue(name, "Details");
         }
 
 
