@@ -1,3 +1,4 @@
+using EaApplicationTest.Models;
 using EaApplicationTest.Pages;
 using EaFramework.Config;
 using EaFramework.Driver;
@@ -37,23 +38,30 @@ namespace EaApplicationTest
 
         }
 
-        [Theory]
-        [InlineData("FirstProduct", "New prod description", 21354, "CPU")]
-        [InlineData("FirstProduct2", "New prod description", 3000, "MONITOR")]
-        public void Test2(string name, string description, int price, string productType)
+        [Fact]
+        
+        public void Test2()
         {
             // HomePage
             var homePage = new HomePage(_driverFixture);
             var productPage = new ProductPage(_driverFixture);
+
+            var product = new Product
+            {
+                Name = "New Prod",
+                Description = "New Product",
+                Price = 12312,
+                ProductType = ProductType.EXTERNAL
+            };
 
             // Click Create link
             homePage.ClickProduct();
 
             // Create Product
             productPage.ClickCreateButton();
-            productPage.CreateProduct(name, description, price, productType);
+            productPage.CreateProduct(product);
 
-            productPage.PerformCLickOnSpecialValue(name, "Details");
+            productPage.PerformCLickOnSpecialValue(product.Name, "Details");
         }
 
 

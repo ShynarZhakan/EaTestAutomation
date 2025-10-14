@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EaApplicationTest.Models;
 using EaFramework.Driver;
 using EaFramework.Extensions;
 using OpenQA.Selenium;
@@ -31,12 +32,12 @@ namespace EaApplicationTest.Pages
             lnkCreate.Click();
         }
 
-        public void CreateProduct(string productName, string productDescription, int price, string productType)
+        public void CreateProduct(Product product)
         {
-            txtName.SendKeys(productName);
-            txtDesc.SendKeys(productDescription);
-            txtPrice.SendKeys(price.ToString());
-            ddlProductType.SelectDropDownByText(productType);
+            txtName.SendKeys(product.Name);
+            txtDesc.SendKeys(product.Description);
+            txtPrice.SendKeys(product.Price.ToString());
+            ddlProductType.SelectDropDownByText(product.ProductType.ToString());
             btnCreate.Click();
         }
 
