@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EaApplicationTest.Models;
+﻿using EaApplicationTest.Models;
 using EaFramework.Driver;
 using EaFramework.Extensions;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 namespace EaApplicationTest.Pages
 {
     public class ProductPage
     {
-        private readonly IDriverFixture _driverFixture;
-        public ProductPage(IDriverFixture driverFixture)
+        private readonly IDriverWait _driver;
+
+        public ProductPage(IDriverWait driver)
         {
-            _driverFixture = driverFixture;
+            _driver = driver;
         }
 
-        private IWebElement lnkCreate => _driverFixture.Driver.FindElement(By.LinkText("Create"));
-        private IWebElement txtName => _driverFixture.Driver.FindElement(By.Id("Name"));
-        private IWebElement txtDesc => _driverFixture.Driver.FindElement(By.Id("Description"));
-        private IWebElement txtPrice => _driverFixture.Driver.FindElement(By.Id("Price"));
-        private IWebElement ddlProductType => _driverFixture.Driver.FindElement(By.Id("ProductType"));
-        private IWebElement btnCreate => _driverFixture.Driver.FindElement(By.Id("Create"));
-        private IWebElement tblList => _driverFixture.Driver.FindElement(By.CssSelector(".table"));
+        private IWebElement lnkCreate => _driver.FindElement(By.LinkText("Create"));
+        private IWebElement txtName => _driver.FindElement(By.Id("Name"));
+        private IWebElement txtDesc => _driver.FindElement(By.Id("Description"));
+        private IWebElement txtPrice => _driver.FindElement(By.Id("Price"));
+        private IWebElement ddlProductType => _driver.FindElement(By.Id("ProductType"));
+        private IWebElement btnCreate => _driver.FindElement(By.Id("Create"));
+        private IWebElement tblList => _driver.FindElement(By.CssSelector(".table"));
 
         public void ClickCreateButton()
         {

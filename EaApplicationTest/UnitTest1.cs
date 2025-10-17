@@ -9,18 +9,13 @@ namespace EaApplicationTest
     public class UnitTest1 : IDisposable
     {
         private IDriverFixture _driverFixture;
+        private IDriverWait _driverWait;
         public UnitTest1()
         {
-            //var testSettings = new TestSettings
-            //{
-            //    BrowserType = DriverFixture.BrowserType.Chrome,
-            //    ApplicationUrl = new Uri("http://localhost:8000/"),
-            //    TimeoutInternal = 30
-            //};
-
-            var testSettings = ConfigReader.ReadConfig();
+           var testSettings = ConfigReader.ReadConfig();
 
             _driverFixture = new DriverFixture(testSettings);
+            _driverWait = new DriverWait(_driverFixture, testSettings);
 
         }
 
