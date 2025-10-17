@@ -1,3 +1,4 @@
+using AutoFixture.Xunit2;
 using EaApplicationTest.Models;
 using EaApplicationTest.Pages;
 using EaFramework.Config;
@@ -10,20 +11,23 @@ namespace EaApplicationTest
         private IDriverFixture _driverFixture;
         public UnitTest1()
         {
-            var testSettings = new TestSettings
-            {
-                BrowserType = DriverFixture.BrowserType.Chrome,
-                ApplicationUrl = new Uri("http://localhost:8000/"),
-                TimeoutInternal = 30
-            };
+            //var testSettings = new TestSettings
+            //{
+            //    BrowserType = DriverFixture.BrowserType.Chrome,
+            //    ApplicationUrl = new Uri("http://localhost:8000/"),
+            //    TimeoutInternal = 30
+            //};
+
+            var testSettings = ConfigReader.ReadConfig();
 
             _driverFixture = new DriverFixture(testSettings);
 
         }
 
 
-        [Fact]
-        public void Test1()
+        [Theory]
+        [AutoData]
+        public void Test1(Product product)
         {
             // HomePage
             var homePage = new HomePage(_driverFixture);
@@ -34,7 +38,7 @@ namespace EaApplicationTest
 
             // Create Product
             productPage.ClickCreateButton();
-            productPage.CreateProduct("POM product", "POM Description", 4000, "CPU");
+            productPage.CreateProduct(product);
 
         }
 
