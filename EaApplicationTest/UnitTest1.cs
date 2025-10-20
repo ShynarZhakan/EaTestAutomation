@@ -1,7 +1,6 @@
 using AutoFixture.Xunit2;
 using EaApplicationTest.Models;
 using EaApplicationTest.Pages;
-using EaFramework.Config;
 using EaFramework.Driver;
 
 namespace EaApplicationTest
