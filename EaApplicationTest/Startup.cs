@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EaFramework.Config;
+using EaFramework.Driver;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EaApplicationTest
@@ -11,7 +8,12 @@ namespace EaApplicationTest
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton();
+            services
+                .AddSingleton(ConfigReader.ReadConfig())
+                .AddScoped<IDriverFixture, DriverFixture>()
+                .AddScoped<IDriverWait, DriverWait>()
+                .AddScoped<Pages.IHomePage, Pages.HomePage>()
+                .AddScoped<Pages.IProductPage, Pages.ProductPage>();
         }
     }
 }

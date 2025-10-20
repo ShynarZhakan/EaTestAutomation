@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace EaApplicationTest.Pages
 {
-    public class HomePage
+    public class HomePage : IHomePage
     {
         private readonly IDriverWait _driver;
 

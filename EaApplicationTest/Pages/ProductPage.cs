@@ -5,7 +5,14 @@ using OpenQA.Selenium;
 
 namespace EaApplicationTest.Pages
 {
-    public class ProductPage
+    public interface IProductPage
+    {
+        void ClickCreateButton();
+        void CreateProduct(Product product);
+        void PerformCLickOnSpecialValue(string name, string operation);
+    }
+
+    public class ProductPage : IProductPage
     {
         private readonly IDriverWait _driver;
 

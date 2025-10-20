@@ -7,15 +7,15 @@ namespace EaApplicationTest
 {
     public class UnitTest1 : IDisposable
     {
-        private IDriverFixture _driverFixture;
-        private IDriverWait _driverWait;
-        public UnitTest1()
+        private readonly IDriverFixture _driverFixture;
+        private readonly IHomePage _homePage;
+        private readonly IProductPage _productPage;
+
+        public UnitTest1(IDriverFixture driverFixture,  IHomePage homePage, IProductPage productPage)
         {
-           var testSettings = ConfigReader.ReadConfig();
-
-            _driverFixture = new DriverFixture(testSettings);
-            _driverWait = new DriverWait(_driverFixture, testSettings);
-
+            _driverFixture = driverFixture;
+            _homePage = homePage;
+            _productPage = productPage;
         }
 
 
@@ -23,43 +23,28 @@ namespace EaApplicationTest
         [AutoData]
         public void Test1(Product product)
         {
-            // HomePage
-            var homePage = new HomePage(_driverFixture);
-            var productPage = new ProductPage(_driverFixture);
-
             // Click Create link
-            homePage.ClickProduct();
+            _homePage.ClickProduct();
 
             // Create Product
-            productPage.ClickCreateButton();
-            productPage.CreateProduct(product);
+            _productPage.ClickCreateButton();
+            _productPage.CreateProduct(product);
 
         }
 
-        [Fact]
-        
-        public void Test2()
+        [Theory]
+        [AutoData]
+
+        public void Test2(Product product)
         {
-            // HomePage
-            var homePage = new HomePage(_driverFixture);
-            var productPage = new ProductPage(_driverFixture);
-
-            var product = new Product
-            {
-                Name = "New Prod",
-                Description = "New Product",
-                Price = 12312,
-                ProductType = ProductType.EXTERNAL
-            };
-
             // Click Create link
-            homePage.ClickProduct();
+            _homePage.ClickProduct();
 
             // Create Product
-            productPage.ClickCreateButton();
-            productPage.CreateProduct(product);
+            _productPage.ClickCreateButton();
+            _productPage.CreateProduct(product);
 
-            productPage.PerformCLickOnSpecialValue(product.Name, "Details");
+            _productPage.PerformCLickOnSpecialValue(product.Name, "Details");
         }
 
 
