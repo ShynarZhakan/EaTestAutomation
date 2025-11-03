@@ -1,5 +1,4 @@
 ﻿using EaApplicationTest.Models;
-using EaFramework.Driver;
 using EaFramework.Extensions;
 using OpenQA.Selenium;
 

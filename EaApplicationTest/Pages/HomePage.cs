@@ -1,5 +1,4 @@
-﻿using EaFramework.Driver;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace EaApplicationTest.Pages
 {
