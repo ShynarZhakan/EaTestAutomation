@@ -6,7 +6,7 @@ namespace EaFramework.Config
     {
         public BrowserType BrowserType { get; set; }
 
-        public Uri ApplicationUrl { get; set; }
+        public required Uri ApplicationUrl { get; init; }
 
         public float? TimeoutInternal { get; set; }
 

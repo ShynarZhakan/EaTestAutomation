@@ -1,8 +1,9 @@
 ﻿using EaFramework.Models;
+using EaFramework.Driver;
 using EaFramework.Extensions;
 using OpenQA.Selenium;
 
-namespace EaApplicationTest.Pages
+namespace EaFramework.Pages
 {
     public interface IProductPage
     {

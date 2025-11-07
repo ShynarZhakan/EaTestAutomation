@@ -1,6 +1,8 @@
 using AutoFixture.Xunit2;
-using EaApplicationTest.Models;
-using EaApplicationTest.Pages;
+using EaFramework.Models;
+using EaFramework.Pages;
+using Xunit;
+
 
 namespace EaApplicationTest
 {

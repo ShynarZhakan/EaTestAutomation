@@ -1,6 +1,6 @@
 using System;
-using EaApplicationTest.Models;
-using EaApplicationTest.Pages;
+using EaFramework.Models;
+using EaFramework.Pages;
 using FluentAssertions;
 using Reqnroll;
 

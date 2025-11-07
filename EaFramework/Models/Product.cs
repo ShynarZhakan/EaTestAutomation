@@ -1,4 +1,4 @@
-﻿namespace EaApplicationTest.Models
+﻿namespace EaFramework.Models
 {
     public class Product
     {
