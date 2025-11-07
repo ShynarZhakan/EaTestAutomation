@@ -1,14 +1,13 @@
 using System;
 using EaApplicationTest.Models;
 using EaApplicationTest.Pages;
-using Io.Cucumber.Messages.Types;
+using FluentAssertions;
 using Reqnroll;
-using Product = EaApplicationTest.Models.Product;
 
 namespace EaReqnRollTests1.StepDefinitions
 {
     [Binding]
-    public class ProductStepDefinitions
+    public sealed class ProductStepDefinitions
     {
         private readonly ScenarioContext _scenarioContext;
         private readonly IHomePage _homePage;
@@ -19,24 +18,25 @@ namespace EaReqnRollTests1.StepDefinitions
             _scenarioContext = scenarioContext;
             _homePage = homePage;
             _productPage = productPage;
-        }
+            
+        }   
 
-        [Given("I click on the Products menu")]
-        public void GivenIClickOnTheProductsMenu()
+        [Given("I click on the Product menu")]
+        public void GivenIClickOnTheProductMenu()
         {
             _homePage.ClickProduct();
         }
 
-        [Given(@"I click ""{.*}"" link")]
+        [Given("I click {string} link")]
         public void GivenIClickLink(string create)
         {
             _productPage.ClickCreateButton();
         }
 
         [Given("I create product with following details")]
-        public void GivenICreateProductWithFollowingDetails(Table table)
+        public void GivenICreateProductWithFollowingDetails(DataTable dataTable)
         {
-            var product = table.CreateInstance<Product>(); //This is inbuild method of Reqnroll & Specflow
+            var product = dataTable.CreateInstance<Product>();
             _productPage.CreateProduct(product);
             _scenarioContext.Set<Product>(product);
         }
@@ -51,7 +51,8 @@ namespace EaReqnRollTests1.StepDefinitions
         [Then("I see all the product details as entered")]
         public void ThenISeeAllTheProductDetailsAsEntered()
         {
-            throw new PendingStepException();
+            var product = _scenarioContext.Get<Product>();
+            _productPage.GetProductName().Should().BeEquivalentTo(product.Name.Trim());
         }
     }
 }

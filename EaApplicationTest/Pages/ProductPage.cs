@@ -9,6 +9,8 @@ namespace EaApplicationTest.Pages
         void ClickCreateButton();
         void CreateProduct(Product product);
         void PerformCLickOnSpecialValue(string name, string operation);
+
+        string GetProductName();
     }
 
     public class ProductPage : IProductPage
@@ -46,6 +48,8 @@ namespace EaApplicationTest.Pages
         {
             tblList.PerformActionOnCell("5", "Name", name, operation);
         }
+
+        public string GetProductName() => txtName.Text;
 
 
     }
