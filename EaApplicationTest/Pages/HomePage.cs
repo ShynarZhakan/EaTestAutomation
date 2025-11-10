@@ -1,7 +1,13 @@
 ﻿using OpenQA.Selenium;
 
 namespace EaApplicationTest.Pages
+
 {
+    public interface IHomePage
+    {
+        void ClickProduct();
+    }
+
     public class HomePage : IHomePage
     {
         private readonly IDriverWait _driver;

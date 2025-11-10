@@ -1,4 +1,5 @@
-﻿using static EaFramework.Driver.DriverFixture;
+﻿using EaFramework.Driver;
+using static EaFramework.Driver.DriverFixture;
 
 namespace EaFramework.Config
 {

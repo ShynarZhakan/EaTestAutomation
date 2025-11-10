@@ -1,1 +1,2 @@
-﻿global using EaFramework.Driver;
+﻿global using Xunit;
+global using EaFramework.Driver;

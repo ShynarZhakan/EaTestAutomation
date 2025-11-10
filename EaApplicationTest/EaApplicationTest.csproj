@@ -29,4 +29,10 @@
 	<ItemGroup>
 		<ProjectReference Include="..\EaFramework\EaFramework.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿
 using EaFramework.Config;
 using EaFramework.Driver;
-using EaFramework.Pages;
+using EaApplicationTest.Pages;
 using Microsoft.Extensions.DependencyInjection;
 using Reqnroll.Microsoft.Extensions.DependencyInjection;
 

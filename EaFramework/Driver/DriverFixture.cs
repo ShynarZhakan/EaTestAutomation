@@ -6,7 +6,7 @@ using OpenQA.Selenium.Firefox;
 
 namespace EaFramework.Driver
 {
-    public class DriverFixture : IDriverFixture
+    public class DriverFixture : IDriverFixture, IDisposable
     {
         private readonly TestSettings _testSettings;
         public IWebDriver Driver { get; }
@@ -27,6 +27,11 @@ namespace EaFramework.Driver
                 BrowserType.EdgeChromium => new EdgeDriver(),
                 _ => new ChromeDriver(),
             };
+        }
+
+        public void Dispose()
+        {
+            Driver.Quit();
         }
 
         public enum BrowserType

@@ -1,9 +1,6 @@
 ﻿using EaFramework.Config;
 using Microsoft.Extensions.DependencyInjection;
-using HomePage = EaApplicationTest.Pages.HomePage;
-using IHomePage = EaApplicationTest.Pages.IHomePage;
-using IProductPage = EaApplicationTest.Pages.IProductPage;
-using ProductPage = EaApplicationTest.Pages.ProductPage;
+using EaApplicationTest.Pages;
 
 
 namespace EaApplicationTest
