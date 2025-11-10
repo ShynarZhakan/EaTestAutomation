@@ -23,6 +23,7 @@
 
 	<ItemGroup>
 		<!-- ONLY the framework, not the unit-test project -->
+		<ProjectReference Include="..\EaApplicationTest\EaApplicationTest.csproj" />
 		<ProjectReference Include="..\EaFramework\EaFramework.csproj" />
 	</ItemGroup>
 

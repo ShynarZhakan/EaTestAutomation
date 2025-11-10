@@ -2,7 +2,7 @@ using System;
 using EaApplicationTest.Models;
 using EaApplicationTest.Pages;
 using FluentAssertions;
-using Reqnroll;
+using Reqnroll.Assist;
 
 namespace EaReqnRollTests1.StepDefinitions
 {

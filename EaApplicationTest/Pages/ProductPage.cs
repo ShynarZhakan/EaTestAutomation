@@ -11,6 +11,8 @@ namespace EaApplicationTest.Pages
         void PerformCLickOnSpecialValue(string name, string operation);
 
         string GetProductName();
+        void DeleteProduct();
+        void ClickBackToList();
     }
 
     public class ProductPage : IProductPage
@@ -29,6 +31,8 @@ namespace EaApplicationTest.Pages
         private IWebElement ddlProductType => _driver.FindElement(By.Id("ProductType"));
         private IWebElement btnCreate => _driver.FindElement(By.Id("Create"));
         private IWebElement tblList => _driver.FindElement(By.CssSelector(".table"));
+        private IWebElement btnDelete => _driver.FindElement(By.ClassName("btn-danger"));
+        private IWebElement lnkBackToList => _driver.FindElement(By.LinkText("Back to List"));
 
         public void ClickCreateButton()
         {
@@ -51,6 +55,17 @@ namespace EaApplicationTest.Pages
 
         public string GetProductName() => txtName.Text;
 
+        public void ClickBackToList()
+        {
+            lnkBackToList.Click();
+        }
+
+        public void DeleteProduct()
+        {
+            btnDelete.Click();
+        }
+
+        
 
     }
 }
