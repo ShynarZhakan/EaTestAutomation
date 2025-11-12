@@ -1,5 +1,6 @@
 ﻿using EaApplicationTest.Models;
 using EaFramework.Extensions;
+using FluentAssertions;
 using OpenQA.Selenium;
 
 namespace EaApplicationTest.Pages
@@ -11,8 +12,16 @@ namespace EaApplicationTest.Pages
         void PerformCLickOnSpecialValue(string name, string operation);
 
         string GetProductName();
+        string GetProductDescription();
+        int GetProductPrice();
+
         void DeleteProduct();
         void ClickBackToList();
+        void EditProduct(Product product);
+        bool IsProductDeleted(string name, int timeoutSeconds = 5, int pollMs = 200);
+
+        //void IsProductDeleted(string productName);
+
     }
 
     public class ProductPage : IProductPage
@@ -34,6 +43,8 @@ namespace EaApplicationTest.Pages
         private IWebElement btnDelete => _driver.FindElement(By.ClassName("btn-danger"));
         private IWebElement lnkBackToList => _driver.FindElement(By.LinkText("Back to List"));
 
+        private IWebElement btnSaveEdit => _driver.FindElement(By.ClassName("btn-primary"));
+
         public void ClickCreateButton()
         {
             lnkCreate.Click();
@@ -54,6 +65,9 @@ namespace EaApplicationTest.Pages
         }
 
         public string GetProductName() => txtName.Text;
+        public string GetProductDescription() => txtDesc.Text;
+        public int GetProductPrice() => int.Parse(txtPrice.Text);
+        
 
         public void ClickBackToList()
         {
@@ -65,7 +79,42 @@ namespace EaApplicationTest.Pages
             btnDelete.Click();
         }
 
-        
+        public void EditProduct(Product product)
+        {
+            txtName.Clear();
+            txtName.SendKeys(product.Name);
+            txtDesc.Clear();
+            txtDesc.SendKeys(product.Description);
+            txtPrice.Clear();
+            txtPrice.SendKeys(product.Price.ToString());
+            btnSaveEdit.Click();
+        }
+
+        public bool IsProductDeleted(string name, int timeoutSeconds = 5, int pollMs = 200)
+        {
+            var deadline = DateTime.UtcNow.AddSeconds(timeoutSeconds);
+            var target = name?.Trim() ?? string.Empty;
+
+            while (DateTime.UtcNow < deadline)
+            {
+                // Re-find the table each poll to avoid stale elements
+                var table = _driver.FindElement(By.CssSelector(".table"));
+
+                // Search only inside the table (relative XPath with dot)
+                var matches = table.FindElements(
+                    By.XPath($".//td[normalize-space()='{target}']")
+                );
+
+                if (matches.Count == 0)
+                    return true;
+
+                Thread.Sleep(pollMs);
+            }
+
+            return false; // still found after timeout
+        }
+
+
 
     }
 }

@@ -1,7 +1,7 @@
 using AutoFixture.Xunit2;
 using EaApplicationTest.Models;
 using EaApplicationTest.Pages;
-
+using FluentAssertions;
 
 namespace EaApplicationTest
 {
@@ -32,7 +32,7 @@ namespace EaApplicationTest
 
             _productPage.PerformCLickOnSpecialValue(product.Name, "Details");
 
-            Assert.Equal(product.Name.Trim(), _productPage.GetProductName());
+            _productPage.GetProductName().Should().Be(product.Name.Trim());
 
             
         }
@@ -53,7 +53,7 @@ namespace EaApplicationTest
 
             _productPage.PerformCLickOnSpecialValue(product.Name, "Details");
 
-            Assert.Equal(product.Name.Trim(), _productPage.GetProductName());
+            _productPage.GetProductName().Should().Be(product.Name.Trim());
 
             //Delete Product
             _productPage.ClickBackToList();
@@ -61,7 +61,50 @@ namespace EaApplicationTest
             _productPage.DeleteProduct();
 
             
+            
         }
+
+        [Theory]
+        [InlineAutoData("New_product")]
+        public void CreateAndEditProduct(string productName, Product product)
+        {
+            product.Name = productName;
+
+            // Click Create link
+            _homePage.ClickProduct();
+            // Create Product
+            _productPage.ClickCreateButton();
+            _productPage.CreateProduct(product);
+            _productPage.PerformCLickOnSpecialValue(product.Name, "Details");
+            //Assert
+            _productPage.GetProductName().Should().Be(product.Name.Trim());
+
+            //Edit Product
+            _productPage.ClickBackToList();
+            _productPage.PerformCLickOnSpecialValue(product.Name, "Edit");
+            string editedName = product.Name + "_edited";
+            product.Name = editedName;
+            string editedDescription = product.Description + "_edited";
+            product.Description = editedDescription;
+            string editedPrice = (product.Price + 100).ToString();
+            _productPage.EditProduct(product);
+            _productPage.PerformCLickOnSpecialValue(editedName, "Details");
+
+            //Assert
+            _productPage.GetProductName().Should().Be(editedName.Trim());
+            _productPage.GetProductDescription().Should().Be(editedDescription.Trim());
+            _productPage.GetProductPrice().Should().Be(product.Price);
+
+            //Delete Product
+            _productPage.ClickBackToList();
+            _productPage.PerformCLickOnSpecialValue(product.Name, "Delete");
+            _productPage.DeleteProduct();
+            _productPage.IsProductDeleted(editedName).Should().BeTrue("product should be removed from the list after deletion");
+
+
+        }
+
+        
 
 
     }
